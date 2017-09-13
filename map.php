@@ -3,6 +3,8 @@
         <link rel="stylesheet" href="../openlayers4/css/ol.css" type="text/css">
         <script src="../openlayers4/build/ol.js" type="text/javascript"></script>    
         <title>Project WSBD Gan</title>
+
+        <!--        load database-->
         <?php
         include_once ("koneksi.php");
         ?>
@@ -13,6 +15,7 @@
         <div id="map" class="map"></div>
         <script type="text/javascript">
 
+//generate layer sesuai database layer
 <?php
 $sql = "SELECT * FROM layer";
 $result = $conn->query($sql);
@@ -41,6 +44,8 @@ if ($result->num_rows > 0) {
                             new ol.layer.Tile({
                             source: new ol.source.OSM()
                             })
+
+//generate layer yang di load sesuai banyakanya isi database layer
 <?php
 $sql = "SELECT * FROM layer";
 $result = $conn->query($sql);
@@ -48,7 +53,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         ?>
 
-                            ,layer<?php echo $row['id']; ?>
+                            , layer<?php echo $row['id']; ?>
 
         <?php
     }
@@ -67,6 +72,8 @@ if ($result->num_rows > 0) {
                             new ol.control.OverviewMap()
                     ],
                     view: new ol.View({
+
+//ubah setting x,y dan zoom sesuai database
 <?php
 $sql = "SELECT * FROM setting where id = 1";
 $result = $conn->query($sql);
