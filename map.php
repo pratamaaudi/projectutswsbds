@@ -22,22 +22,30 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         ?>
-
-                    var stroke_coklat = new ol.style.Stroke({
-                    color: '#ffffff',
+                    var fill<?php echo $row['id']; ?> = new ol.style.Fill({
+                    color: 'rgba(<?php echo $row['rgb']; ?>,<?php echo $row['alpha']; ?>)'
+                    });
+                    
+                    var stroke<?php echo $row['id']; ?> = new ol.style.Stroke({
+                    color: '<?php echo $row['stroke']; ?>',
                             width: 1.25
                     });
-                    var fill_biru = new ol.style.Fill({
-                    color: 'rgba(0,0,255,1)'
-                    });
-                    var style_sma = new ol.style.Style({
+                    
+                    if (<?php echo $row['tipe']; ?> == 1){
+                    var style<?php echo $row['id']; ?> = new ol.style.Style({
                     image: new ol.style.Circle({
-                    fill: fill_biru,
-                            stroke: stroke_coklat,
+                    fill: fill<?php echo $row['id']; ?>,
+                            stroke: stroke<?php echo $row['id']; ?>,
                             radius: 5
                     })
                     });
-                    
+                    } else {
+                    var style<?php echo $row['id']; ?> = new ol.style.Style({
+                    fill: fill<?php echo $row['id']; ?>,
+                            stroke: stroke<?php echo $row['id']; ?>
+                    });
+                    }
+
                     var layer<?php echo $row['id']; ?> = new ol.layer.Vector({
                     source: new ol.source.Vector({
                     format: new ol.format.GeoJSON({
@@ -45,7 +53,7 @@ if ($result->num_rows > 0) {
                     }),
                             url: '<?php echo $row['layer']; ?>'
                     }),
-                            style: [style_sma]
+                            style: [style<?php echo $row['id']; ?>]
                     });
         <?php
     }

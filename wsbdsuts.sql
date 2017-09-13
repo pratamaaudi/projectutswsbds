@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2017 at 10:52 AM
+-- Generation Time: Sep 13, 2017 at 12:36 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -28,9 +28,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `layer` (
   `id` int(11) NOT NULL,
-  `warna` varchar(10) DEFAULT NULL,
+  `stroke` varchar(10) NOT NULL,
+  `rgb` varchar(10) DEFAULT NULL,
   `alpha` double DEFAULT NULL,
   `layer` varchar(100) DEFAULT NULL,
+  `tipe` int(11) NOT NULL,
   `urutan` int(11) DEFAULT NULL,
   `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -39,9 +41,10 @@ CREATE TABLE `layer` (
 -- Dumping data for table `layer`
 --
 
-INSERT INTO `layer` (`id`, `warna`, `alpha`, `layer`, `urutan`, `profile_id`) VALUES
-(1, NULL, NULL, 'sma.geojson', 1, 1),
-(2, NULL, NULL, 'jalanbesar.geojson', 2, 1);
+INSERT INTO `layer` (`id`, `stroke`, `rgb`, `alpha`, `layer`, `tipe`, `urutan`, `profile_id`) VALUES
+(1, '#ffffff', '0,0,255', 1, 'sma.geojson', 1, 1, 1),
+(2, '#00ffd0', '0,0,255', 1, 'jalanbesar.geojson', 2, 2, 1),
+(3, '#ff4766', '0, 38, 255', 1, 'univ.geojson', 3, 3, 1);
 
 -- --------------------------------------------------------
 
