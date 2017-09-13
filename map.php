@@ -14,7 +14,7 @@
         <h2>My Map</h2>
         <div id="map" class="map"></div>
         <script type="text/javascript">
-
+            var map = "bing";
 //generate layer sesuai database layer
 <?php
 $sql = "SELECT * FROM layer";
@@ -25,12 +25,10 @@ if ($result->num_rows > 0) {
                     var fill<?php echo $row['id']; ?> = new ol.style.Fill({
                     color: 'rgba(<?php echo $row['rgb']; ?>,<?php echo $row['alpha']; ?>)'
                     });
-                    
                     var stroke<?php echo $row['id']; ?> = new ol.style.Stroke({
                     color: '<?php echo $row['stroke']; ?>',
                             width: 1.25
                     });
-                    
                     if (<?php echo $row['tipe']; ?> == 1){
                     var style<?php echo $row['id']; ?> = new ol.style.Style({
                     image: new ol.style.Circle({
@@ -59,9 +57,40 @@ if ($result->num_rows > 0) {
     }
 }
 ?>
+            if (map == "bing"){
+            var sourceBingMaps = new ol.source.BingMaps({
+            key: 'AjQ2yJ1-i-j_WMmtyTrjaZz-3WdMb2Leh_mxe9-YBNKk_mz1cjRC7-8ILM7WUVEu',
+                    imagerySet: 'Road',
+                    culture: 'fr-FR'
+            });
+            var bingMapsRoad = new ol.layer.Tile({
+            preload: Infinity,
+                    source: sourceBingMaps
+            });
+            var map = new ol.Map({
+            layers: [
+                    bingMapsRoad
+<?php
+$sql = "SELECT * FROM layer";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        ?>
 
+                    , layer<?php echo $row['id']; ?>
 
-
+        <?php
+    }
+}
+?>
+            ],
+                    target: 'map',
+                    view: new ol.View({
+                    center: ol.proj.transform([112.752087, - 7.257495], 'EPSG:4326', 'EPSG:3857'),
+                            zoom: 13
+                    })
+            });
+            } else if (map == "osm"){
             var map = new ol.Map({
             target: 'map',
                     layers: [
@@ -115,6 +144,7 @@ if ($result->num_rows > 0) {
 ?>
 
             });
+            }
         </script>
 
     </body>
