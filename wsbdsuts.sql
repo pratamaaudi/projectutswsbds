@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2017 at 01:41 PM
+-- Generation Time: Sep 14, 2017 at 11:22 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `layer` (
   `id` int(11) NOT NULL,
-  `stroke` varchar(10) NOT NULL,
+  `stroke` varchar(10) DEFAULT NULL,
   `rgb` varchar(10) DEFAULT NULL,
   `alpha` double DEFAULT NULL,
   `layer` varchar(100) DEFAULT NULL,
-  `tipe` int(11) NOT NULL,
+  `tipe` int(11) DEFAULT NULL,
   `urutan` int(11) DEFAULT NULL,
   `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,8 +43,8 @@ CREATE TABLE `layer` (
 
 INSERT INTO `layer` (`id`, `stroke`, `rgb`, `alpha`, `layer`, `tipe`, `urutan`, `profile_id`) VALUES
 (1, '#ffffff', '0,0,255', 1, 'sma.geojson', 1, 1, 1),
-(2, '#00ffd0', '0,0,255', 1, 'jalanbesar.geojson', 2, 2, 1),
-(3, '#ff4766', '0, 38, 255', 1, 'univ.geojson', 3, 3, 1);
+(2, '#ffffff', '0,0,255', 1, 'univ.geojson', 2, 2, 1),
+(3, '#ffffff', '0,0,255', 1, 'jalanbesar.geojson', 2, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id`, `x`, `y`, `zoom`) VALUES
-(1, '112.752087', '-7.257495', 13);
+(1, '112.755284', '-7.263013', 13);
 
 --
 -- Indexes for dumped tables
@@ -109,6 +109,25 @@ ALTER TABLE `profile`
 ALTER TABLE `setting`
   ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `layer`
+--
+ALTER TABLE `layer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `profile`
+--
+ALTER TABLE `profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `setting`
+--
+ALTER TABLE `setting`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --

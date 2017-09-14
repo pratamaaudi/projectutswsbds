@@ -6,7 +6,7 @@
 
         <!--        load database-->
         <?php
-        include_once ("koneksi.php");
+        include_once ("class/koneksi.php");
         ?>
 
     </head>
