@@ -14,7 +14,16 @@
         <h2>My Map</h2>
         <div id="map" class="map"></div>
         <script type="text/javascript">
-            var map = "osm";
+            var map = <?php
+            if(isset($_POST['osm'])) {
+               echo "'osm'"; 
+            }else if(isset($_POST['bing'])) {
+               echo "'bing'"; 
+            }else{
+                echo "'osm'";
+            } ?>
+            
+
 //generate layer sesuai database layer
 <?php
 $sql = "SELECT * FROM layer";
@@ -64,5 +73,11 @@ if ($result->num_rows > 0) {
             }
         </script>
 
+<form action="map.php" method="post">
+    <input type="submit" name="osm" value="osm">
+</form>
+<form action="map.php" method="post">
+    <input type="submit" value="bing" name="bing">
+</form>
     </body>
 </html>
