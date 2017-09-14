@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
                             format: new ol.format.GeoJSON({
                                 defaultDataProjection: 'EPSG:4326'
                             }),
-                            url: '<?php echo $row['layer']; ?>'
+                            url: 'layer/<?php echo $row['layer']; ?>'
                         }),
                         style: [style<?php echo $row['id']; ?>]
                     });
