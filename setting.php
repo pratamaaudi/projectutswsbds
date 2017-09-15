@@ -1,77 +1,64 @@
 <!DOCTYPE html>
 <html>
-<body>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $("#pengaturan").click(function () {
+                    $('#setting').load('pengaturan.php');
+                })
+                $("#tambah_layer").click(function () {
+                    $('#setting').load('tambah_layer.php');
+                })
+                $('#setting').load('pengaturan.php');
+            })
+        </script>
+    </head>
+    <body>
+        <div class="row" style="margin-bottom: 10px">
 
-<form action="map.php" method="post" enctype = "multipart/form-data">
-	<h3>Map Bing / OSM</h3>
-    <input type="radio" name="maptype" value="bing" checked> bing
-  	<input type="radio" name="maptype" value="osm"> osm<br>
-  	<br>
+            <div 
+                class="col-sm-4" 
+                id="pengaturan"
+                style="
+                background: cyan; 
+                padding-top: 20px; 
+                padding-bottom: 20px">
 
-  	<h3>Set Titik Tengah dan Zoom Default</h3>
-  	Titik X :<br>
-  	<input type="text" name="X" placeholder ="koordinat X">
-  	<br>
-  	Titik Y :<br>
-  	<input type="text" name="Y" placeholder ="koordinat Y">
-  	<br>
-  	Zoom :<br>
-  	<input type="text" name="zoom" placeholder ="zoom">
-  	<br> <br>
+                <h4 style="text-align: center">PENGATURAN</h4>
 
-    <h3>POP UP</h3>
-    <input type="checkbox" name="onoff" value="ON">On
-    <br>
-    Kolom field:<br>
-    <input type="text" name="field">
-    <br><br>
+            </div>
 
-    <input type="submit" value="Submit" name="submit">
-</form> <br>
+            <div 
+                class="col-sm-4" 
+                id="tambah_layer"
+                style="
+                background: cyan; 
+                padding-top: 20px; 
+                padding-bottom: 20px">
 
-<form action="map.php" method="post" enctype = "multipart/form-data">
-  	<h3>Upload Layer Line</h3>
-  	Select Layer:
-  	<input type="file" name="layerLine" id="layerLine">
-  	<br>
-  	Warna Garis:<br>
-  	<input type="text" name="warnaGarisLine" placeholder ="Warna Garis">
-  	<br><br>
-    <input type="submit" value="Submit" name="submit">
-</form> <br>
-       
-<form action="map.php" method="post" enctype = "multipart/form-data">        
-    <h3>Upload Layer Polygon</h3>
-  	Select Layer:
-  	<input type="file" name="layerPolygon" id="layerPolygon">
-  	<br>
-  	Warna Garis:<br>
-  	<input type="text" name="warnaGarisPolygon" placeholder ="Warna Garis">
-  	<br>
-  	Warna Luasan:<br>
-  	<input type="text" name="warnaLuasanPolygon" placeholder ="Warna Luasan">
-  	<br>
-  	Trasnparansi:<br>
-  	<input type="text" name="transparansiPolygon" placeholder ="Transparansi">
-  	<br><br>
-    <input type="submit" value="Submit" name="submit">
-</form> <br>
+                <h4 style="text-align: center">TAMBAH LAYER</h4>
 
-<form action="map.php" method="post" enctype = "multipart/form-data">
-  	<h3>Upload Layer Point</h3>
-    Select Layer:
-  	<input type="file" name="layerPoint" id="layerPoint">
-  	<br>
-  	<input type="radio" name="maptype" value="rboPoint"> point<br>
-    Warna Luasan:<br>
-  	<input type="text" name="warnaLuasanPoint" placeholder ="Warna Luasan">
-  	<br>
-    <input type="radio" name="maptype" value="rboIcon" checked> icon<br>
-  	Select Icon :
-  	<input type="file" name="icon" id="icon">
-  	<br><br>
-    <input type="submit" value="Submit" name="submit">
-</form>  	
+            </div>
 
-</body>
+            <div 
+                class="col-sm-4" 
+                onclick="alert('load layer')" 
+                style="
+                background: cyan; 
+                padding-top: 20px; 
+                padding-bottom: 20px">
+
+                <h4 style="text-align: center">LAYER</h4>
+
+            </div>
+
+        </div>
+
+        <div class="container-fluid" id="setting"></div>
+    </body>
 </html>

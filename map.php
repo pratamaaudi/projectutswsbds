@@ -31,14 +31,18 @@
                 </form>
             </div>
 
-            <div class="col-sm-4"><input class="btn btn-primary" type="button" value="setting" style="float: right"/></div>
+            <div class="col-sm-4">
+                <form action="setting.php" method="post">
+                    <button class="btn btn-primary" type="submit" style="float: right"><img src="asset/gear.png" style="width: 30px; height: 50%"></button>
+                </form>
+            </div>
         </div>
 
         <div class="container-fluid" style="height: 89%; width: 100%;">
             <div id="map" class="map"></div>
         </div>
-        
-        
+
+
         <script type="text/javascript">
             var map = <?php
         if (isset($_POST['osm'])) {
@@ -67,11 +71,5 @@ if ($result->num_rows > 0) {
 <?php include ("osm.php"); ?>
             }
         </script>
-
-
-        <?php
-        include ("upload.php");
-        include './setting.php';
-        ?>
     </body>
 </html>
