@@ -8,7 +8,7 @@
 
 //generate layer yang di load sesuai banyakanya isi database layer
 <?php
-$sql = "SELECT * FROM layer";
+$sql = "SELECT * FROM `layer` WHERE 1 ORDER BY urutan";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {

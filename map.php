@@ -12,7 +12,7 @@
     </head>
     <body>
         <h2>My Map</h2>
-        <div id="map" class="map"></div>
+        <div id="map" class="map"  style="height: 70%; width: 100%;"></div>
         <script type="text/javascript">
             var map = <?php
         if (isset($_POST['osm'])) {
@@ -27,7 +27,7 @@
 
 //generate layer sesuai database layer
 <?php
-$sql = "SELECT * FROM layer";
+$sql = "SELECT * FROM `layer` WHERE 1 ORDER BY urutan";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
