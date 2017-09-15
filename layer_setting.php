@@ -12,16 +12,20 @@
         var style<?php echo $row['id']; ?> = new ol.style.Style({
             image: new ol.style.Circle({
                 fill: fill<?php echo $row['id']; ?>,
-                stroke: stroke<?php echo $row['id']; ?>,
                 radius: 5
             })
         });
-    } else {
+    } else if (<?php echo $row['tipe']; ?> == 2) {
         var style<?php echo $row['id']; ?> = new ol.style.Style({
-            fill: fill<?php echo $row['id']; ?>,
             stroke: stroke<?php echo $row['id']; ?>
         });
+    } else {
+        var style<?php echo $row['id']; ?> = new ol.style.Style({
+            stroke: stroke<?php echo $row['id']; ?>,
+            fill: fill<?php echo $row['id']; ?>
+        });
     }
+
 
     var layer<?php echo $row['id']; ?> = new ol.layer.Vector({
         source: new ol.source.Vector({
