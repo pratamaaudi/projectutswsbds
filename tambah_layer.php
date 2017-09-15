@@ -1,43 +1,64 @@
-<form action="map.php" method="post" enctype = "multipart/form-data">
-    <h3>Upload Layer Line</h3>
-    Select Layer:
-    <input type="file" name="layerLine" id="layerLine">
-    <br>
-    Warna Garis:<br>
-    <input type="text" name="warnaGarisLine" placeholder ="Warna Garis">
-    <br><br>
-    <input type="submit" value="Submit" name="submit">
-</form> <br>
+<html>
+    <head>
+        <script>
+            $(document).ready(function () {
+                $("#point").click(function () {
+                    $('#tambah_layer_jenis').load('tambah_layer_point.php');
 
-<form action="map.php" method="post" enctype = "multipart/form-data">        
-    <h3>Upload Layer Polygon</h3>
-    Select Layer:
-    <input type="file" name="layerPolygon" id="layerPolygon">
-    <br>
-    Warna Garis:<br>
-    <input type="text" name="warnaGarisPolygon" placeholder ="Warna Garis">
-    <br>
-    Warna Luasan:<br>
-    <input type="text" name="warnaLuasanPolygon" placeholder ="Warna Luasan">
-    <br>
-    Trasnparansi:<br>
-    <input type="text" name="transparansiPolygon" placeholder ="Transparansi">
-    <br><br>
-    <input type="submit" value="Submit" name="submit">
-</form> <br>
+                })
+                $("#line").click(function () {
+                    $('#tambah_layer_jenis').load('tambah_layer_line.php');
 
-<form action="map.php" method="post" enctype = "multipart/form-data">
-    <h3>Upload Layer Point</h3>
-    Select Layer:
-    <input type="file" name="layerPoint" id="layerPoint">
-    <br>
-    <input type="radio" name="maptype" value="rboPoint"> point<br>
-    Warna Luasan:<br>
-    <input type="text" name="warnaLuasanPoint" placeholder ="Warna Luasan">
-    <br>
-    <input type="radio" name="maptype" value="rboIcon" checked> icon<br>
-    Select Icon :
-    <input type="file" name="icon" id="icon">
-    <br><br>
-    <input type="submit" value="Submit" name="submit">
-</form>  
+                })
+                $("#polygon").click(function () {
+                    $('#tambah_layer_jenis').load('tambah_layer_polygon.php');
+
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div class="row" style="margin-bottom: 10px">
+
+            <div
+                class="col-sm-4" 
+                id="point"
+                style="
+                background: greenyellow; 
+                padding-bottom: 20px">
+
+                <h4 style="text-align: center">POINT / TITIK</h4>
+
+            </div>
+
+            <div 
+                class="col-sm-4" 
+                id="line"
+                style="
+                background: greenyellow;
+                padding-bottom: 20px">
+
+                <h4 style="text-align: center">LINE / GARIS</h4>
+
+            </div>
+
+            <div 
+                class="col-sm-4" 
+                id="polygon"
+                style="
+                background: greenyellow; 
+                padding-bottom: 20px">
+
+                <h4 style="text-align: center">POLYGON / AREA</h4>
+
+            </div>
+
+        </div>
+
+        <div class="container-fluid" id="tambah_layer_jenis"></div>
+
+         <br>
+
+         
+    </body>
+</html>
