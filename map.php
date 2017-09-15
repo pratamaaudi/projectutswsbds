@@ -15,7 +15,7 @@
 
     </head>
     <body>
-        <div class="row" style="margin: 10px">
+        <div class="row" style="margin: 10px; height: 7%">
 
             <div class="col-sm-4"><h2>My Map</h2></div>
 
@@ -34,7 +34,11 @@
             <div class="col-sm-4"><input class="btn btn-primary" type="button" value="setting" style="float: right"/></div>
         </div>
 
-        <div id="map" class="map"  style="height: 70%; width: 100%;"></div>
+        <div class="container-fluid" style="height: 89%; width: 100%;">
+            <div id="map" class="map"></div>
+        </div>
+        
+        
         <script type="text/javascript">
             var map = <?php
         if (isset($_POST['osm'])) {
