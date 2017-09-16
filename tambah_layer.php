@@ -55,7 +55,10 @@
 
         </div>
 
-        <div class="container-fluid" id="tambah_layer_jenis"></div>
+        <div 
+            class="container-fluid" 
+            id="tambah_layer_jenis">
+        </div>
 
          <br>
 

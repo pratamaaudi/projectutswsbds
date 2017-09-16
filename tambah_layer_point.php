@@ -1,15 +1,56 @@
-<form action="map.php" method="post" enctype = "multipart/form-data">
+<form 
+    action="class/upload.php" 
+    method="post" 
+    enctype = "multipart/form-data">
+    
+    <input
+        type="hidden"
+        name="jenis"
+        value="point"/>
+
     <h3>Upload Layer Point</h3>
     Select Layer:
-    <input type="file" name="layerPoint" id="layerPoint">
+
+    <input 
+        type="file" 
+        name="fileToUpload" 
+        id="layerPoint">
+
     <br>
-    <input type="radio" name="maptype" value="rboPoint"> point<br>
+
+    <input 
+        type="radio" 
+        name="maptype" 
+        value="rboPoint">point
+
+    <br>
     Warna Luasan:<br>
-    <input type="text" name="warnaLuasanPoint" placeholder ="Warna Luasan">
+
+    <input 
+        type="text" 
+        name="fill" 
+        placeholder ="Warna Luasan">
+
     <br>
-    <input type="radio" name="maptype" value="rboIcon" checked> icon<br>
+
+    <input 
+        type="radio" 
+        name="maptype" 
+        value="rboIcon" 
+        checked> icon
+
+    <br>
     Select Icon :
-    <input type="file" name="icon" id="icon">
+
+    <input 
+        type="file" 
+        name="icon" 
+        id="icon">
+
     <br><br>
-    <input type="submit" value="Submit" name="submit">
+
+    <input 
+        type="submit" 
+        value="Submit" 
+        name="submit">
 </form> 

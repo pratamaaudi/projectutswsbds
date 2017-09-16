@@ -21,21 +21,49 @@
 
     <h3>Set Titik Tengah dan Zoom Default</h3>
     Titik X :<br>
-    <input type="text" name="X" placeholder ="koordinat X">
+
+    <input 
+        type="text" 
+        name="X" 
+        placeholder ="koordinat X">
+
     <br>
     Titik Y :<br>
-    <input type="text" name="Y" placeholder ="koordinat Y">
+
+    <input 
+        type="text" 
+        name="Y" 
+        placeholder ="koordinat Y">
+
     <br>
     Zoom :<br>
-    <input type="text" name="zoom" placeholder ="zoom">
+
+    <input 
+        type="text" 
+        name="zoom" 
+        placeholder ="zoom">
+
     <br> <br>
 
     <h3>POP UP</h3>
-    <input type="checkbox" name="onoff" value="ON">On
+
+    <input 
+        type="checkbox" 
+        name="onoff" 
+        value="ON">On
+
     <br>
     Kolom field:<br>
-    <input type="text" name="field">
+
+    <input 
+        type="text" 
+        name="field">
+
     <br><br>
 
-    <input type="submit" value="Submit" name="submit">
+    <input 
+        type="submit" 
+        value="Submit" 
+        name="submit">
+
 </form> <br>
