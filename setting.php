@@ -14,7 +14,7 @@
         <script>
             $(document).ready(function () {
                 $("#pengaturan").click(function () {
-                    $('#setting').load('pengaturan.php');
+                    $('#setting').load('general.php');
                     
                 })
                 $("#tambah_layer").click(function () {
