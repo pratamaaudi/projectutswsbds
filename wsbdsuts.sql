@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2017 at 11:22 AM
+-- Generation Time: Sep 16, 2017 at 03:09 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `layer` (
   `rgb` varchar(10) DEFAULT NULL,
   `alpha` double DEFAULT NULL,
   `layer` varchar(100) DEFAULT NULL,
-  `tipe` int(11) DEFAULT NULL,
+  `tipe` enum('point','line','polygon') DEFAULT NULL,
   `urutan` int(11) DEFAULT NULL,
   `profile_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -42,9 +42,9 @@ CREATE TABLE `layer` (
 --
 
 INSERT INTO `layer` (`id`, `stroke`, `rgb`, `alpha`, `layer`, `tipe`, `urutan`, `profile_id`) VALUES
-(1, '#ffffff', '0,0,255', 1, 'sma.geojson', 1, 1, 1),
-(2, '#ffffff', '0,0,255', 1, 'univ.geojson', 2, 2, 1),
-(3, '#ffffff', '0,0,255', 1, 'jalanbesar.geojson', 2, 3, 1);
+(1, '#ffffff', '0,0,255', 1, 'sma.geojson', 'point', 1, 1),
+(2, '#ffffff', '0,0,255', 1, 'univ.geojson', 'polygon', 2, 1),
+(3, '#ffffff', '0,0,255', 1, 'jalanbesar.geojson', 'line', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -75,15 +75,16 @@ CREATE TABLE `setting` (
   `id` int(11) NOT NULL,
   `x` varchar(20) DEFAULT NULL,
   `y` varchar(20) DEFAULT NULL,
-  `zoom` int(11) DEFAULT NULL
+  `zoom` int(11) DEFAULT NULL,
+  `map` enum('osm','bing','','') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `setting`
 --
 
-INSERT INTO `setting` (`id`, `x`, `y`, `zoom`) VALUES
-(1, '112.755284', '-7.263013', 13);
+INSERT INTO `setting` (`id`, `x`, `y`, `zoom`, `map`) VALUES
+(1, '112.755284', '-7.263013', 13, 'osm');
 
 --
 -- Indexes for dumped tables

@@ -8,14 +8,14 @@
         width: 1.25
     });
 
-    if (<?php echo $row['tipe']; ?> == 1) {
+    if ("<?php echo $row['tipe']; ?>" == "point") {
         var style<?php echo $row['id']; ?> = new ol.style.Style({
             image: new ol.style.Circle({
                 fill: fill<?php echo $row['id']; ?>,
                 radius: 5
             })
         });
-    } else if (<?php echo $row['tipe']; ?> == 2) {
+    } else if ("<?php echo $row['tipe']; ?>" == "line") {
         var style<?php echo $row['id']; ?> = new ol.style.Style({
             stroke: stroke<?php echo $row['id']; ?>
         });

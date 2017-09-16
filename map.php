@@ -44,26 +44,14 @@
 
 
         <script type="text/javascript">
-            var map = <?php
-        if (isset($_POST['osm'])) {
-            echo "'osm'";
-        } else if (isset($_POST['bing'])) {
-            echo "'bing'";
-        } else {
-            echo "'osm'";
-        }
-        ?>
 
-
-//generate layer sesuai database layer
+            var map;
 <?php
-$sql = "SELECT * FROM `layer` WHERE 1 ORDER BY urutan";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        include 'layer_setting.php';
-    }
-}
+load_map_database($conn);
+
+override_map();
+
+load_layer_setting($conn);
 ?>
             if (map == "bing") {
 <?php include ("bing.php"); ?>
@@ -73,3 +61,38 @@ if ($result->num_rows > 0) {
         </script>
     </body>
 </html>
+
+<?php
+
+function load_map_database($conn) {
+    $sql = "SELECT * FROM setting where id = 1";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            ?>
+
+            map = '<?php echo $row['map']; ?>';
+
+            <?php
+        }
+    }
+}
+
+function override_map() {
+    if (isset($_POST['osm'])) {
+        echo "map = 'osm'";
+    } else if (isset($_POST['bing'])) {
+        echo "map = 'bing'";
+    }
+}
+
+function load_layer_setting($conn) {
+    $sql = "SELECT * FROM `layer` WHERE 1 ORDER BY urutan";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            include 'layer_setting.php';
+        }
+    }
+}
+?>
