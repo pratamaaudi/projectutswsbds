@@ -39,6 +39,9 @@
                 $("#tambah_layer").click(function () {
                     $('#setting').load('tambah_layer.php');
                 })
+                $("#edit_layer").click(function () {
+                    $('#setting').load('edit_layer.php');
+                })
                 $('#setting').load('general.php');
             })
         </script>
@@ -96,7 +99,7 @@
 
             <div 
                 class="col-sm-4" 
-                onclick="alert('load layer')" 
+                id="edit_layer"
                 style="
                 background: cyan; 
                 padding-top: 20px; 
@@ -110,7 +113,8 @@
 
         <div 
             class="container-fluid" 
-            id="setting">
+            id="setting"
+            style="width: 100%;">
         </div>
     </body>
 </html>
