@@ -36,3 +36,15 @@
         }),
         style: [style<?php echo $row['id']; ?>]
     });
+
+    var status_layer<?php echo $row['id']; ?> = true;
+
+    function fun_layer<?php echo $row['id']; ?>() {
+        if (status_layer<?php echo $row['id']; ?> == true) {
+            status_layer<?php echo $row['id']; ?> = false;
+            layer<?php echo $row['id']; ?>.setVisible(status_layer<?php echo $row['id']; ?>);
+        } else {
+            status_layer<?php echo $row['id']; ?> = true;
+            layer<?php echo $row['id']; ?>.setVisible(status_layer<?php echo $row['id']; ?>);
+        }
+    }

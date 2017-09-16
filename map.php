@@ -101,7 +101,7 @@
 
         <div 
             class="container-fluid" 
-            style="height: 89%; width: 100%;">
+            style="height: 70%; width: 100%;">
 
             <div 
                 id="map" 
@@ -109,6 +109,18 @@
             </div>
         </div>
 
+        <div 
+            class="container" 
+            style="
+            margin-top: 10px;
+            background: blue;">
+
+            <h4 style="color: white">LEGEND</h4>
+
+            <?php generate_legend_button($conn); ?>
+
+
+        </div>
 
         <script type="text/javascript">
 
@@ -154,11 +166,30 @@ function override_map() {
 }
 
 function load_layer_setting($conn) {
-    $sql = "SELECT * FROM `layer` WHERE 1 ORDER BY urutan";
+    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             include 'layer_setting.php';
+        }
+    }
+}
+
+function generate_legend_button($conn) {
+    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            ?>
+
+            <input 
+                type="checkbox"
+                checked value="<?php echo $row['layer']; ?>" 
+                onclick="fun_layer<?php echo $row['id']; ?>()"/>
+                    
+            <span style="color: white;"><?php echo $row['layer']; ?></span></br>
+
+            <?php
         }
     }
 }
