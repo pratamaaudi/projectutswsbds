@@ -31,8 +31,6 @@ function generate_layout($conn) {
                 padding: 20px;
                 margin-top: 20px;">
 
-
-
                 <div class="form-group">
                     <h4>ID</h4>
 
@@ -40,7 +38,8 @@ function generate_layout($conn) {
                         type="text" 
                         class="form-control" 
                         id="id" 
-                        readonly="">
+                        readonly=""
+                        value="<?php echo $row['id']; ?>">
 
                     <h4>Nama Layer</h4>
 
@@ -48,34 +47,51 @@ function generate_layout($conn) {
                         type="text" 
                         class="form-control" 
                         id="layername"
-                        readonly="">
+                        readonly=""
+                        value="<?php echo $row['layer']; ?>">
+
+                    <?php if ($row['tipe'] != 'point') { ?>
+                        <h4>Stroke</h4>
+
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="stroke" 
+                            placeholder="#ffffff"
+                            value="<?php echo $row['stroke']; ?>">
+                            <?php
+                        }
+                        ?>
+
+                    <?php if ($row['tipe'] != 'line') { ?>
+
+                        <h4>Fill</h4>
+
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="rgb" 
+                            placeholder="0,0,0"
+                            value="<?php echo $row['rgb']; ?>">
+
+                    <?php } ?>  
+
+                    <?php if ($row['tipe'] == 'polygon') { ?>
+
+                        <h4>Alpha</h4>
+
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            id="alpha"
+                            step="0.1"
+                            max="1"
+                            min="0"
+                            value="<?php echo $row['alpha']; ?>">
+
+                    <?php } ?>
 
 
-                    <h4>Stroke</h4>
-
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="stroke" 
-                        placeholder="#ffffff">
-
-                    <h4>RGB</h4>
-
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="rgb" 
-                        placeholder="0,0,0">
-
-                    <h4>Alpha</h4>
-
-                    <input 
-                        type="number" 
-                        class="form-control" 
-                        id="alpha"
-                        step="0.1"
-                        max="1"
-                        min="0">
 
                     <h4>Urutan Layer</h4>
 
@@ -83,7 +99,8 @@ function generate_layout($conn) {
                         type="number" 
                         class="form-control" 
                         id="urutan"
-                        min="1">
+                        min="1"
+                        value="<?php echo $row['urutan']; ?>">
                 </div>
             </div>
             <?php
