@@ -1,19 +1,24 @@
 <form 
-    action="map.php" 
+    action="class/update.php" 
     method="post" 
     enctype = "multipart/form-data">
+    
+    <input
+        type="hidden"
+        name="jenis"
+        value="general"/>
 
     <h3>Map Bing / OSM</h3>
 
     <input 
         type="radio" 
-        name="maptype" 
+        name="map" 
         value="bing" 
         checked> bing
 
     <input 
         type="radio" 
-        name="maptype" 
+        name="map" 
         value="osm"> osm
 
     <br>
@@ -24,7 +29,7 @@
 
     <input 
         type="text" 
-        name="X" 
+        name="x" 
         placeholder ="koordinat X">
 
     <br>
@@ -32,7 +37,7 @@
 
     <input 
         type="text" 
-        name="Y" 
+        name="y" 
         placeholder ="koordinat Y">
 
     <br>
