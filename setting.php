@@ -39,7 +39,7 @@
                 $("#tambah_layer").click(function () {
                     $('#setting').load('tambah_layer.php');
                 })
-                $('#setting').load('pengaturan.php');
+                $('#setting').load('general.php');
             })
         </script>
     </head>

@@ -1,74 +1,107 @@
-<form 
-    action="class/update.php" 
-    method="post" 
-    enctype = "multipart/form-data">
-    
-    <input
-        type="hidden"
-        name="jenis"
-        value="general"/>
+<?php
+include_once 'class/koneksi.php';
 
-    <h3>Map Bing / OSM</h3>
+$sql = "SELECT * FROM setting where id = 1";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        ?>
 
-    <input 
-        type="radio" 
-        name="map" 
-        value="bing" 
-        checked> bing
+        <form 
+            action="class/update.php" 
+            method="post" 
+            enctype = "multipart/form-data">
 
-    <input 
-        type="radio" 
-        name="map" 
-        value="osm"> osm
+            <input
+                type="hidden"
+                name="jenis"
+                value="general"/>
 
-    <br>
-    <br>
+            <h3>Map Bing / OSM</h3>
 
-    <h3>Set Titik Tengah dan Zoom Default</h3>
-    Titik X :<br>
+            <?php if ($row['map'] == 'bing') { ?>
+                <input 
+                    type="radio" 
+                    name="map" 
+                    value="bing"
+                    checked> bing
 
-    <input 
-        type="text" 
-        name="x" 
-        placeholder ="koordinat X">
+                <input 
+                    type="radio" 
+                    name="map" 
+                    value="osm"> osm
+                <?php } else {
+                    ?>
+                <input 
+                    type="radio" 
+                    name="map" 
+                    value="bing"> bing
 
-    <br>
-    Titik Y :<br>
+                <input 
+                    type="radio" 
+                    name="map" 
+                    value="osm"
+                    checked> osm
+                    <?php
+                }
+                ?>
+            <br>
+            <br>
 
-    <input 
-        type="text" 
-        name="y" 
-        placeholder ="koordinat Y">
+            <h3>Set Titik Tengah dan Zoom Default</h3>
+            Titik X :<br>
 
-    <br>
-    Zoom :<br>
+            <input 
+                type="text" 
+                name="x" 
+                placeholder ="koordinat X"
+                value="<?php echo $row['x']; ?>">
 
-    <input 
-        type="text" 
-        name="zoom" 
-        placeholder ="zoom">
+            <br>
+            Titik Y :<br>
 
-    <br> <br>
+            <input 
+                type="text" 
+                name="y" 
+                placeholder ="koordinat Y"
+                value="<?php echo $row['y']; ?>">
 
-    <h3>POP UP</h3>
+            <br>
+            Zoom :<br>
 
-    <input 
-        type="checkbox" 
-        name="onoff" 
-        value="ON">On
+            <input 
+                type="text" 
+                name="zoom" 
+                placeholder ="zoom"
+                value="<?php echo $row['zoom']; ?>">
 
-    <br>
-    Kolom field:<br>
+            <br> <br>
 
-    <input 
-        type="text" 
-        name="field">
+            <h3>POP UP</h3>
 
-    <br><br>
+            <input 
+                type="checkbox" 
+                name="onoff" 
+                value="ON">On
 
-    <input 
-        type="submit" 
-        value="Submit" 
-        name="submit">
+            <br>
+            Kolom field:<br>
 
-</form> <br>
+            <input 
+                type="text" 
+                name="field">
+
+            <br><br>
+
+            <input 
+                type="submit" 
+                value="Submit" 
+                name="submit">
+
+        </form>
+
+        <?php
+    }
+}
+?>
+

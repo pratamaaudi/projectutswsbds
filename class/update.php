@@ -10,5 +10,6 @@ if($jenis=='general'){
     $y = $_POST["y"];
     $zoom = $_POST["zoom"];
     update_setting_general($x, $y, $zoom, $map,'1', $conn);
+    header('Location: ../map.php');
 }
 ?>

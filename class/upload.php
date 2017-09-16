@@ -49,7 +49,7 @@ if (isset($_POST["submit"])) {
                 insert_layer(basename($_FILES["fileToUpload"]["name"]), '1', '2', $conn);
             }
             echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
-//            header('Location: ../map.php');
+            header('Location: ../map.php');
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
