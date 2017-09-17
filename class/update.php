@@ -12,7 +12,7 @@ if ($jenis == 'general') {
     $zoom = $_POST["zoom"];
     update_setting_general($x, $y, $zoom, $map, '1', $conn);
 } else if ($jenis == 'urutan') {
-    debug_if_urutan();
+    //debug_if_urutan();
     $urutan = array();
     $id_layer = array();
     $sql = "SELECT * FROM layer";
@@ -43,7 +43,7 @@ if ($jenis == 'general') {
         $rgb = $_POST["rgb"];
         update_layer_point($rgb, $id, '1', $conn);
         
-        debug_update_layer_point($rgb);
+        //debug_update_layer_point($rgb);
     } else if ($tipe == 'line') {
         $stroke = $_POST["stroke"];
         update_layer_line($stroke, $id, '1', $conn);
@@ -61,7 +61,7 @@ if ($jenis == 'general') {
     debug_update_layer($id, $tipe);
 }
 
-//header('Location: ../map.php');
+header('Location: ../map.php');
 
 function cek_duplikasi_array($array) {
     if (count(array_unique($array)) < count($array)) {
