@@ -1,126 +1,197 @@
 <?php
 include_once 'class/koneksi.php';
+include_once 'class/insert_database.php';
 ?>
 
-<form
-    action="map.php"
-    style="
-    margin-top: 20px; 
-    margin-bottom: 20px; ">
 
-    <div class="container">
 
-        <?php generate_layout($conn); ?>
+<div class="container">
 
-        <button 
-            type="submit" 
-            class="btn btn-primary"
+    <form
+        action="class/update.php"
+        method="post">
+
+        <h4>URUTAN LAYER</h4>
+        <?php generate_urutan_layer($conn); ?>
+        
+        <input
+            type="hidden"
+            name="jenis"
+            id="jenisa"
+            value="urutan"/>
+
+        <input
+            type="submit"
+            class="btn btn-success"
+            value="SAVE"
             style="
-            float: right;
-            margin-top: 10px;
-            margin-bottom: 50px;">Submit
-        </button> 
+            margin-top: 10px;">
 
-    </div>
+        </br></br>
+
+        <hr>
+
+    </form>
+
+    </br>
+
+    <h4>SETTING LAYER</h4>
+    <?php generate_layer_setting($conn); ?>
+
+</div>
 
 
-</form>
+
 <?php
 
-function generate_layout($conn) {
-    $sql = "SELECT * FROM layer";
+function generate_urutan_layer($conn) {
+    $max = hitung_data_layer("1", $conn);
+
+    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             ?>
 
             <div 
-                class ="container" 
+                class="row"
+                style="margin-top: 10px;">
+                <div class="col-sm-3">
+                    <a 
+                        href="#form<?php echo $row['id']; ?>">
+                        <button
+                            class="btn">
+                                <?php echo $row['layer']; ?>
+                        </button> 
+                    </a>
+                </div>
+                <div class="col-sm-1">
+                    <input
+                        id="urutan<?php echo $row['id']; ?>"
+                        name="urutan<?php echo $row['id']; ?>"
+                        type="number"
+                        class="form-control"
+                        min="1"
+                        max="<?php echo $max; ?>"
+                        value="<?php echo $row['urutan']; ?>">
+                    
+                    <input
+                        type="hidden"
+                        name="id_layer<?php echo $row['id']; ?>"
+                        value="<?php echo $row['id']; ?>"/>
+                </div>
+
+            </div>
+
+            <?php
+        }
+    }
+}
+
+function generate_layer_setting($conn) {
+    $max = hitung_data_layer("1", $conn);
+
+    $sql = "SELECT * FROM layer";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            ?>
+            <form
+                action="map.php"
+                id="form<?php echo $row['id']; ?>"
                 style="
-                background: cyan;
-                padding: 20px;
-                margin-top: 20px;">
+                margin-top: 20px; 
+                margin-bottom: 20px; ">
+                <div 
+                    class ="container" 
+                    style="
+                    background: cyan;
+                    padding: 20px;
+                    margin-top: 20px;">
 
-                <div class="form-group">
-                    <h4>ID</h4>
-
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="id" 
-                        readonly=""
-                        value="<?php echo $row['id']; ?>">
-
-                    <h4>Nama Layer</h4>
-
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        id="layername"
-                        readonly=""
-                        value="<?php echo $row['layer']; ?>">
-
-                    <?php if ($row['tipe'] != 'point' && $row['tipe'] != 'point_icon') { ?>
-                        <h4>Stroke</h4>
+                    <div class="form-group">
+                        <h4>ID</h4>
 
                         <input 
                             type="text" 
                             class="form-control" 
-                            id="stroke" 
-                            placeholder="#ffffff"
-                            value="<?php echo $row['stroke']; ?>">
-                            <?php
-                        }
+                            id="id" 
+                            readonly=""
+                            value="<?php echo $row['id']; ?>">
+
+                        <h4>Nama Layer</h4>
+
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="layername"
+                            readonly=""
+                            value="<?php echo $row['layer']; ?>">
+
+                        <?php if ($row['tipe'] != 'point' && $row['tipe'] != 'point_icon') { ?>
+                            <h4>Stroke</h4>
+
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="stroke" 
+                                placeholder="#ffffff"
+                                value="<?php echo $row['stroke']; ?>">
+                                <?php
+                            }
+                            ?>
+
+                        <?php if ($row['tipe'] != 'line' && $row['tipe'] != 'point_icon') { ?>
+
+                            <h4>Fill</h4>
+
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                placeholder="0,0,0"
+                                value="<?php echo $row['rgb']; ?>">
+
+                        <?php } ?>  
+
+                        <?php if ($row['tipe'] == 'polygon' && $row['tipe'] != 'point_icon') { ?>
+
+                            <h4>Alpha</h4>
+
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                id="alpha"
+                                step="0.1"
+                                max="1"
+                                min="0"
+                                value="<?php echo $row['alpha']; ?>">
+
+                        <?php } ?>
+
+                        <?php if ($row['tipe'] == 'point_icon') { ?>
+                            <h4>Icon</h4>
+
+                            <input 
+                                type="text" 
+                                class="form-control"
+                                readonly
+                                value="<?php echo $row['icon']; ?>"><?php }
                         ?>
 
-                    <?php if ($row['tipe'] != 'line' && $row['tipe'] != 'point_icon') { ?>
+                        <?php if ($row['tipe'] != 'point_icon') { ?>
+                            <button 
+                                type="submit" 
+                                class="btn btn-primary form-control"
+                                style="
+                                margin-top: 20px;">Submit
+                            </button> 
+                        <?php } ?>
 
-                        <h4>Fill</h4>
 
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="rgb" 
-                            placeholder="0,0,0"
-                            value="<?php echo $row['rgb']; ?>">
-
-                    <?php } ?>  
-
-                    <?php if ($row['tipe'] == 'polygon' && $row['tipe'] != 'point_icon') { ?>
-
-                        <h4>Alpha</h4>
-
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            id="alpha"
-                            step="0.1"
-                            max="1"
-                            min="0"
-                            value="<?php echo $row['alpha']; ?>">
-
-                    <?php } ?>
-
-                    <?php if ($row['tipe'] == 'point_icon') { ?>
-                        <h4>Icon</h4>
-
-                        <input 
-                            type="text" 
-                            class="form-control"
-                            readonly
-                            value="<?php echo $row['icon']; ?>"><?php }
-                    ?>
-
-                    <h4>Urutan Layer</h4>
-
-                    <input 
-                        type="number" 
-                        class="form-control" 
-                        id="urutan"
-                        min="1"
-                        value="<?php echo $row['urutan']; ?>">
+                    </div>
                 </div>
-            </div>
+            </form>
             <?php
         }
     }

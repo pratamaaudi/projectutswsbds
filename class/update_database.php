@@ -10,4 +10,12 @@ function update_setting_general($x, $y, $zoom, $map, $setting_id, $conn) {
     $result = mysqli_query($conn, $query);
 }
 
+function update_urutan_layer($urutan, $id_layer, $profile_id, $conn) {
+    $query = "UPDATE `layer` SET "
+            . "`urutan` = '$urutan' WHERE "
+            . "`layer`.`id` = $id_layer AND "
+            . "`layer`.`profile_id` = $profile_id;";
+    $result = mysqli_query($conn, $query);
+}
+
 ?>
