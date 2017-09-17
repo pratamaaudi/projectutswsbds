@@ -40,7 +40,10 @@ if ($jenis == 'general') {
     $id = $_POST["id"];
     $tipe = $_POST["tipe"];
     if ($tipe == 'point') {
-        debug_update_layer_point();
+        $rgb = $_POST["rgb"];
+        update_layer_point($rgb, $id, '1', $conn);
+        
+        debug_update_layer_point($rgb);
     } else if ($tipe == 'line') {
         $stroke = $_POST["stroke"];
         update_layer_line($stroke, $id, '1', $conn);
@@ -52,7 +55,7 @@ if ($jenis == 'general') {
         $alpha = $_POST["alpha"];
         update_layer_polygon($stroke, $rgb, $alpha, $id, '1', $conn);
 
-        debug_update_layer_polygon($stroke, $rgb, $alpha);
+        //debug_update_layer_polygon($stroke, $rgb, $alpha);
     }
 
     debug_update_layer($id, $tipe);
@@ -107,8 +110,9 @@ function debug_update_layer($id, $tipe) {
     echo 'tipe = ' . $tipe . ' </br>';
 }
 
-function debug_update_layer_point() {
+function debug_update_layer_point($rgb) {
     echo 'edit layer point </br>';
+    echo 'rgb : ' . $rgb . '</br>';
 }
 
 function debug_update_layer_line($stroke) {
