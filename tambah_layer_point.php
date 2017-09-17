@@ -2,7 +2,7 @@
     action="class/upload.php" 
     method="post" 
     enctype = "multipart/form-data">
-    
+
     <input
         type="hidden"
         name="jenis"
@@ -21,6 +21,21 @@
     <input 
         type="radio" 
         name="maptype" 
+        value="icon" 
+        checked> icon
+
+    <br>
+    Select Icon :
+
+    <input 
+        type="file" 
+        name="uploadicon" 
+        id="icon">
+
+    <br>
+    <input 
+        type="radio" 
+        name="maptype" 
         value="point">point
 
     <br>
@@ -33,21 +48,7 @@
 
     <br>
 
-    <input 
-        type="radio" 
-        name="maptype" 
-        value="icon" 
-        checked> icon
-
     <br>
-    Select Icon :
-
-    <input 
-        type="file" 
-        name="uploadicon" 
-        id="icon">
-
-    <br><br>
 
     <input 
         type="submit" 

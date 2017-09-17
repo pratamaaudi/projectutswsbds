@@ -60,7 +60,7 @@ function generate_layout($conn) {
                         readonly=""
                         value="<?php echo $row['layer']; ?>">
 
-                    <?php if ($row['tipe'] != 'point') { ?>
+                    <?php if ($row['tipe'] != 'point' && $row['tipe'] != 'point_icon') { ?>
                         <h4>Stroke</h4>
 
                         <input 
@@ -73,7 +73,7 @@ function generate_layout($conn) {
                         }
                         ?>
 
-                    <?php if ($row['tipe'] != 'line') { ?>
+                    <?php if ($row['tipe'] != 'line' && $row['tipe'] != 'point_icon') { ?>
 
                         <h4>Fill</h4>
 
@@ -86,7 +86,7 @@ function generate_layout($conn) {
 
                     <?php } ?>  
 
-                    <?php if ($row['tipe'] == 'polygon') { ?>
+                    <?php if ($row['tipe'] == 'polygon' && $row['tipe'] != 'point_icon') { ?>
 
                         <h4>Alpha</h4>
 
@@ -101,7 +101,15 @@ function generate_layout($conn) {
 
                     <?php } ?>
 
+                    <?php if ($row['tipe'] == 'point_icon') { ?>
+                        <h4>Icon</h4>
 
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            readonly
+                            value="<?php echo $row['icon']; ?>"><?php }
+                    ?>
 
                     <h4>Urutan Layer</h4>
 
