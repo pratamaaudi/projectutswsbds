@@ -13,7 +13,7 @@ include_once 'class/insert_database.php';
 
         <h4>URUTAN LAYER</h4>
         <?php generate_urutan_layer($conn); ?>
-        
+
         <input
             type="hidden"
             name="jenis"
@@ -60,12 +60,13 @@ function generate_urutan_layer($conn) {
                     <a 
                         href="#form<?php echo $row['id']; ?>">
                         <button
-                            class="btn">
+                            class="btn"
+                            type="button">
                                 <?php echo $row['layer']; ?>
                         </button> 
                     </a>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                     <input
                         id="urutan<?php echo $row['id']; ?>"
                         name="urutan<?php echo $row['id']; ?>"
@@ -74,7 +75,7 @@ function generate_urutan_layer($conn) {
                         min="1"
                         max="<?php echo $max; ?>"
                         value="<?php echo $row['urutan']; ?>">
-                    
+
                     <input
                         type="hidden"
                         name="id_layer<?php echo $row['id']; ?>"
@@ -91,17 +92,29 @@ function generate_urutan_layer($conn) {
 function generate_layer_setting($conn) {
     $max = hitung_data_layer("1", $conn);
 
-    $sql = "SELECT * FROM layer";
+    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             ?>
             <form
-                action="map.php"
+                action="class/update.php"
                 id="form<?php echo $row['id']; ?>"
+                method="post"
                 style="
                 margin-top: 20px; 
                 margin-bottom: 20px; ">
+                
+                <input
+                    type="hidden"
+                    name="jenis"
+                    value="layer">
+                
+                <input
+                    type="hidden"
+                    name="tipe"
+                    value="<?php echo $row['tipe']; ?>">
+                
                 <div 
                     class ="container" 
                     style="
@@ -116,6 +129,7 @@ function generate_layer_setting($conn) {
                             type="text" 
                             class="form-control" 
                             id="id" 
+                            name="id"
                             readonly=""
                             value="<?php echo $row['id']; ?>">
 
@@ -135,6 +149,7 @@ function generate_layer_setting($conn) {
                                 type="text" 
                                 class="form-control" 
                                 id="stroke" 
+                                name="stroke"
                                 placeholder="#ffffff"
                                 value="<?php echo $row['stroke']; ?>">
                                 <?php

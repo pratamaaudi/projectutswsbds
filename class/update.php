@@ -36,9 +36,22 @@ if ($jenis == 'general') {
             $i++;
         }
     }
+} else if ($jenis == 'layer') {
+    $id = $_POST["id"];
+    $tipe = $_POST["tipe"];
+    if ($tipe == 'point') {
+        debug_update_layer_point();
+    } else if ($tipe == 'line') {
+        $stroke = $_POST["stroke"];
+        update_layer_line($stroke, $id, '1', $conn);
+
+        debug_update_layer_line($stroke);
+    }
+
+    debug_update_layer($id, $tipe);
 }
 
-header('Location: ../map.php');
+//header('Location: ../map.php');
 
 function cek_duplikasi_array($array) {
     if (count(array_unique($array)) < count($array)) {
@@ -77,8 +90,23 @@ function debug_sinkronisasi_array($id_layer, $i) {
     echo $id_layer[$i] . '</br>';
 }
 
-function debug_foreach($i){
-    echo 'data ke '.$i.' berhasil dimasukkan';
+function debug_foreach($i) {
+    echo 'data ke ' . $i . ' berhasil dimasukkan';
+}
+
+function debug_update_layer($id, $tipe) {
+    echo 'edit layer </br>';
+    echo 'id = ' . $id . ' </br>';
+    echo 'tipe = ' . $tipe . ' </br>';
+}
+
+function debug_update_layer_point() {
+    echo 'edit layer point </br>';
+}
+
+function debug_update_layer_line($stroke) {
+    echo 'edit layer line </br>';
+    echo 'stroke : ' . $stroke . '</br>';
 }
 
 ?>

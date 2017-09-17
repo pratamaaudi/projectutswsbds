@@ -18,4 +18,20 @@ function update_urutan_layer($urutan, $id_layer, $profile_id, $conn) {
     $result = mysqli_query($conn, $query);
 }
 
+function update_layer_point($rgb, $id_layer, $profile_id, $conn) {
+    $query = "UPDATE `layer` SET "
+            . "`rgb` = '$rgb' WHERE "
+            . "`layer`.`id` = $id_layer AND "
+            . "`layer`.`profile_id` = $profile_id;";
+    $result = mysqli_query($conn, $query);
+}
+
+function update_layer_line($stroke, $id_layer, $profile_id, $conn) {
+    $query = "UPDATE `layer` SET "
+            . "`stroke` = '$stroke' WHERE "
+            . "`layer`.`id` = $id_layer AND "
+            . "`layer`.`profile_id` = $profile_id;";
+    $result = mysqli_query($conn, $query);
+}
+
 ?>

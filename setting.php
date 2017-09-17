@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            #pengaturan:hover{
-                background-color: white;
-            }
-        </style>
         
         <?php include 'class/plugin.php';?>
         
