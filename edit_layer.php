@@ -8,12 +8,22 @@ include_once 'class/koneksi.php';
     margin-top: 20px; 
     margin-bottom: 20px; ">
 
-    <?php generate_layout($conn); ?>
+    <div class="container">
 
-    <button 
-        type="submit" 
-        class="btn btn-primary">Submit
-    </button>
+        <?php generate_layout($conn); ?>
+
+        <button 
+            type="submit" 
+            class="btn btn-primary"
+            style="
+            float: right;
+            margin-top: 10px;
+            margin-bottom: 50px;">Submit
+        </button> 
+
+    </div>
+
+
 </form>
 <?php
 

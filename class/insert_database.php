@@ -78,6 +78,23 @@ function insert_layer_polygon($nama_layer, $stroke, $fill, $alpha, $profile, $co
     $result = mysqli_query($conn, $query);
 }
 
+function insert_layer_point_icon($nama_layer, $nama_icon, $profile, $conn) {
+    $urutan = hitung_data_layer($profile, $conn) + 1;
+
+    $query = "INSERT INTO `layer` ("
+            . "`layer`, "
+            . "`icon`, "
+            . "`tipe`, "
+            . "`urutan`, "
+            . "`profile_id`) VALUES ("
+            . "'$nama_layer', "
+            . "'$nama_icon', "
+            . "'point_icon', "
+            . "'$urutan', "
+            . "'$profile')";
+    $result = mysqli_query($conn, $query);
+}
+
 function hitung_data_layer($profile, $conn) {
     $sql = "SELECT COUNT(layer)as hasil FROM layer INNER JOIN profile WHERE profile.id='$profile'";
     $result = $conn->query($sql);

@@ -21,7 +21,7 @@
     <input 
         type="radio" 
         name="maptype" 
-        value="rboPoint">point
+        value="point">point
 
     <br>
     Warna Luasan:<br>
@@ -36,7 +36,7 @@
     <input 
         type="radio" 
         name="maptype" 
-        value="rboIcon" 
+        value="icon" 
         checked> icon
 
     <br>
@@ -44,7 +44,7 @@
 
     <input 
         type="file" 
-        name="icon" 
+        name="uploadicon" 
         id="icon">
 
     <br><br>

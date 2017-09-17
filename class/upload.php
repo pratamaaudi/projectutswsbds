@@ -24,6 +24,19 @@ if (isset($_POST["submit"])) {
         echo "Sorry, extention not allowed.";
         $uploadOk = 0;
     }
+
+    if ($jenis == 'point') {
+        $maptype = $_POST["maptype"];
+        if ($maptype == 'icon') {
+            $target_icon = "../asset/";
+            $target_file2 = $target_icon . basename($_FILES["uploadicon"]["name"]);
+            $fileType2 = pathinfo($target_file2, PATHINFO_EXTENSION);
+            if ($fileType2 != "jpg" && $fileType2 != "png" && $fileType2 != "jpeg") {
+                echo "Sorry, icon extention not allowed.";
+                $uploadOk = 0;
+            }
+        }
+    }
 // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
@@ -32,9 +45,17 @@ if (isset($_POST["submit"])) {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
             if ($jenis == 'point') {
-                $fill = $_POST["fill"];
-                insert_layer_point(basename($_FILES["fileToUpload"]["name"]), $fill, '1', $conn);
-                echo 'insert layer point';
+                $maptype = $_POST["maptype"];
+                if ($maptype == 'icon') {
+                    if (move_uploaded_file($_FILES["uploadicon"]["tmp_name"], $target_file2)) {
+                        insert_layer_point_icon(basename($_FILES["fileToUpload"]["name"]), basename($_FILES["uploadicon"]["name"]), "1", $conn);
+                        echo "The file " . basename($_FILES["uploadicon"]["name"]) . " has been uploaded.";
+                    }
+                } else {
+                    $fill = $_POST["fill"];
+                    insert_layer_point(basename($_FILES["fileToUpload"]["name"]), $fill, '1', $conn);
+                    echo 'insert layer point';
+                }
             } else if ($jenis == 'line') {
                 $stroke = $_POST["stroke"];
                 insert_layer_line(basename($_FILES["fileToUpload"]["name"]), $stroke, '1', $conn);

@@ -19,10 +19,21 @@
         var style<?php echo $row['id']; ?> = new ol.style.Style({
             stroke: stroke<?php echo $row['id']; ?>
         });
-    } else {
+    } else if ("<?php echo $row['tipe']; ?>" == "polygon") {
         var style<?php echo $row['id']; ?> = new ol.style.Style({
             stroke: stroke<?php echo $row['id']; ?>,
             fill: fill<?php echo $row['id']; ?>
+        });
+    } else {
+        var style<?php echo $row['id']; ?> = new ol.style.Style({
+            image: new ol.style.Icon({
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'fraction',
+                anchor: [0.5, 0.5],
+                opacity: 1,
+                scale: 0.25,
+                src: '<?php echo $row['icon']; ?>'
+            })
         });
     }
 
