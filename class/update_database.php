@@ -34,4 +34,14 @@ function update_layer_line($stroke, $id_layer, $profile_id, $conn) {
     $result = mysqli_query($conn, $query);
 }
 
+function update_layer_polygon($stroke, $rgb, $alpha, $id_layer, $profile_id, $conn) {
+    $query = "UPDATE `layer` SET "
+            . "`stroke` = '$stroke', "
+            . "`rgb` = '$rgb', "
+            . "`alpha` = '$alpha' WHERE "
+            . "`layer`.`id` = $id_layer AND "
+            . "`layer`.`profile_id` = $profile_id;";
+    $result = mysqli_query($conn, $query);
+}
+
 ?>

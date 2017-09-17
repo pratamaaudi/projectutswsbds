@@ -3,8 +3,6 @@ include_once 'class/koneksi.php';
 include_once 'class/insert_database.php';
 ?>
 
-
-
 <div class="container">
 
     <form
@@ -104,17 +102,17 @@ function generate_layer_setting($conn) {
                 style="
                 margin-top: 20px; 
                 margin-bottom: 20px; ">
-                
+
                 <input
                     type="hidden"
                     name="jenis"
                     value="layer">
-                
+
                 <input
                     type="hidden"
                     name="tipe"
                     value="<?php echo $row['tipe']; ?>">
-                
+
                 <div 
                     class ="container" 
                     style="
@@ -164,6 +162,7 @@ function generate_layer_setting($conn) {
                                 type="text" 
                                 class="form-control" 
                                 id="rgb" 
+                                name="rgb"
                                 placeholder="0,0,0"
                                 value="<?php echo $row['rgb']; ?>">
 
@@ -177,6 +176,7 @@ function generate_layer_setting($conn) {
                                 type="number" 
                                 class="form-control" 
                                 id="alpha"
+                                name="alpha"
                                 step="0.1"
                                 max="1"
                                 min="0"
@@ -202,8 +202,6 @@ function generate_layer_setting($conn) {
                                 margin-top: 20px;">Submit
                             </button> 
                         <?php } ?>
-
-
                     </div>
                 </div>
             </form>
