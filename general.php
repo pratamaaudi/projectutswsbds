@@ -85,6 +85,13 @@ if ($result->num_rows > 0) {
                 value="ON">On
 
             <br>
+            Layer :<br>
+            <select>
+                <?php generate_combo_box($conn); ?>
+            </select>
+
+            <br>
+
             Kolom field:<br>
 
             <input 
@@ -101,6 +108,16 @@ if ($result->num_rows > 0) {
         </form>
 
         <?php
+    }
+}
+
+function generate_combo_box($conn) {
+    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<option>' . $row['layer'] . '</option>';
+        }
     }
 }
 ?>
