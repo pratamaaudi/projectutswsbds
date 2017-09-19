@@ -26,21 +26,5 @@ if ($result->num_rows > 0) {
 ?>
     ],
             target: 'map',
-            view: new ol.View({
-
-<?php
-$sql = "SELECT * FROM setting where id = 1";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        ?>
-
-                    center: ol.proj.transform([<?php echo $row['x']; ?>, <?php echo $row['y']; ?>], 'EPSG:4326', 'EPSG:3857'),
-                            zoom: <?php echo $row['zoom']; ?>
-                    })
-
-        <?php
-    }
-}
-?>
+            view: view1
     });
