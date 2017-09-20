@@ -79,15 +79,45 @@ if ($result->num_rows > 0) {
 
             <h3>POP UP</h3>
 
+            <?php if ($row['popup'] == 1) { ?>
+                <input 
+                    type="checkbox" 
+                    name="popup" 
+                    value="true"
+                    checked=""> POPUP
+                <?php } else {
+                    ?>
+                <input 
+                    type="checkbox" 
+                    name="popup" 
+                    value="OFF"> POPUP
+                    <?php
+                }
+                ?>
+
+
+            <br>
+
+            Kolom field:<br>
+
+            <input 
+                type="text" 
+                name="field_popup"
+                value="<?php echo $row['field_popup']; ?>">
+
+            <br><br>
+
+            <h3>Field List</h3>
+
             <input 
                 type="checkbox" 
-                name="onoff" 
-                value="ON">On
+                name="field_list" 
+                value="OFF"> Field List
 
             <br>
             Layer :<br>
             <select>
-                <?php generate_combo_box($conn); ?>
+                <?php generate_combo_box_point($conn); ?>
             </select>
 
             <br>
@@ -113,6 +143,16 @@ if ($result->num_rows > 0) {
 
 function generate_combo_box($conn) {
     $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<option>' . $row['layer'] . '</option>';
+        }
+    }
+}
+
+function generate_combo_box_point($conn) {
+    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 and tipe = 'point' ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
