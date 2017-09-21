@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
-        <?php include 'class/plugin.php';?>
-        
+
+        <?php include 'class/plugin.php'; ?>
+
         <script>
             $(document).ready(function () {
                 $("#pengaturan").click(function () {
@@ -15,6 +15,9 @@
                 })
                 $("#edit_layer").click(function () {
                     $('#setting').load('edit_layer.php');
+                })
+                $("#profile").click(function () {
+                    $('#setting').load('profile.php');
                 })
                 $('#setting').load('general.php');
             })
@@ -60,7 +63,7 @@
             </div>
 
             <div 
-                class="col-sm-4" 
+                class="col-sm-3" 
                 id="tambah_layer"
                 style="
                 background: cyan; 
@@ -72,7 +75,7 @@
             </div>
 
             <div 
-                class="col-sm-4" 
+                class="col-sm-2" 
                 id="edit_layer"
                 style="
                 background: cyan; 
@@ -80,6 +83,18 @@
                 padding-bottom: 20px">
 
                 <h4 style="text-align: center">LAYER</h4>
+
+            </div>
+
+            <div 
+                class="col-sm-3" 
+                id="profile"
+                style="
+                background: cyan; 
+                padding-top: 20px; 
+                padding-bottom: 20px">
+
+                <h4 style="text-align: center">PROFILE</h4>
 
             </div>
 

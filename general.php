@@ -1,7 +1,9 @@
 <?php
+session_start();
 include_once 'class/koneksi.php';
 
-$sql = "SELECT * FROM setting where id = 1";
+$profile = $_SESSION['profile'];
+$sql = "SELECT * FROM profile INNER JOIN `setting` ON profile.setting_id = setting.id WHERE profile.id = $profile";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -107,29 +109,6 @@ if ($result->num_rows > 0) {
 
             <br><br>
 
-            <h3>Field List</h3>
-
-            <input 
-                type="checkbox" 
-                name="field_list" 
-                value="OFF"> Field List
-
-            <br>
-            Layer :<br>
-            <select>
-                <?php generate_combo_box_point($conn); ?>
-            </select>
-
-            <br>
-
-            Kolom field:<br>
-
-            <input 
-                type="text" 
-                name="field">
-
-            <br><br>
-
             <input 
                 type="submit" 
                 value="Submit" 
@@ -138,26 +117,6 @@ if ($result->num_rows > 0) {
         </form>
 
         <?php
-    }
-}
-
-function generate_combo_box($conn) {
-    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<option>' . $row['layer'] . '</option>';
-        }
-    }
-}
-
-function generate_combo_box_point($conn) {
-    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 and tipe = 'point' ORDER BY urutan";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<option>' . $row['layer'] . '</option>';
-        }
     }
 }
 ?>

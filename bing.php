@@ -12,7 +12,8 @@
     layers: [
             bingMapsRoad
 <?php
-$sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+$profile = $_SESSION['profile'];
+$sql = "SELECT * FROM `layer` WHERE profile_id = $profile ORDER BY urutan";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {

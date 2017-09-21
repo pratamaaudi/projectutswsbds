@@ -1,3 +1,10 @@
+<?php
+session_start();
+set_session_profile();
+
+//debug_post_profile();
+?>
+
 <html lang="en">
     <head>
         <link 
@@ -8,16 +15,10 @@
         <script 
             src="../openlayers4/build/ol.js" 
             type="text/javascript">
-        </script>    
-
-        <script 
-            src="jquery.min.js" 
-            type="text/javascript">
-        </script>  
+        </script> 
 
         <title>Project WSBD Gan</title>
 
-        <!--        load database-->
         <?php
         include_once ("class/koneksi.php");
         include 'class/plugin.php';
@@ -68,7 +69,6 @@
             }
         </style>
 
-
     </head>
     <body>
 
@@ -78,15 +78,7 @@
 
             <div class="col-sm-2"><h2>My Map</h2></div>
 
-            <div class="col-sm-4">
-                <select 
-                    id="pilih_sekolah"
-                    class="form-control"
-                    onchange="menuju_lokasi(this.value)">
-                </select>
-
-
-            </div>
+            <div class="col-sm-3"></div>
 
             <div class="col-sm-1">
                 <form 
@@ -116,7 +108,7 @@
                 </form>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <form 
                     action="setting.php" 
                     method="post">
@@ -177,27 +169,7 @@ override_map();
 
 load_layer_setting($conn);
 ?>
-            var view1 = new ol.View({
-<?php generate_view($conn); ?>
-            });
-
-            var container = document.getElementById('popup');
-            var content = document.getElementById('popup-content');
-            var closer = document.getElementById('popup-closer');
-
-            var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
-                element: container,
-                autoPan: true,
-                autoPanAnimation: {
-                    duration: 250
-                }
-            }));
-
-            closer.onclick = function () {
-                overlay.setPosition(undefined);
-                closer.blur();
-                return false;
-            };
+            var view1 = new ol.View({<?php generate_view($conn); ?>});
 
             if (map == "bing") {
 <?php include ("bing.php"); ?>
@@ -208,33 +180,25 @@ load_layer_setting($conn);
 <?php generate_popup($conn) ?>
 
 <?php generate_geocoder() ?>
-
-            layer17.getSource().on('change', function (evt) {
-                var source = evt.target;
-                if (source.getState() === 'ready') {
-                    var numFeatures = source.getFeatures().length;
-                    for (var i = 0; i < numFeatures; i++) {
-                        var f = source.getFeatures();
-                        $('#pilih_sekolah').append($('<option>', {
-                            value:
-                                    f[i].get('x') +
-                                    '|' +
-                                    f[i].get('y') +
-                                    '|' +
-                                    f[i].get('sekolah'),
-                            text: f[i].get('sekolah')
-                        }));
-                    }
-                }
-            });
         </script>
     </body>
 </html>
 
 <?php
 
+function set_session_profile() {
+    if (isset($_POST['profile'])) {
+        $_SESSION['profile'] = $_POST['profile'];
+    } else if (isset($_SESSION['profile'])) {
+        
+    } else {
+        $_SESSION['profile'] = '1';
+    }
+}
+
 function load_map_database($conn) {
-    $sql = "SELECT * FROM setting where id = 1";
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT setting.map FROM `profile` INNER JOIN setting ON profile.setting_id = setting.id WHERE profile.id = $profile";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -249,14 +213,15 @@ function load_map_database($conn) {
 
 function override_map() {
     if (isset($_POST['osm'])) {
-        echo "map = 'osm'";
+        echo "map = 'osm';";
     } else if (isset($_POST['bing'])) {
-        echo "map = 'bing'";
+        echo "map = 'bing';";
     }
 }
 
 function load_layer_setting($conn) {
-    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT * FROM `layer` WHERE profile_id = $profile ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -266,7 +231,8 @@ function load_layer_setting($conn) {
 }
 
 function generate_legend_button($conn) {
-    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT * FROM `layer` WHERE profile_id = $profile ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -285,32 +251,50 @@ function generate_legend_button($conn) {
 }
 
 function generate_view($conn) {
-    $sql = "SELECT * FROM setting where id = 1";
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT setting.x,setting.y,setting.zoom FROM `profile` INNER JOIN setting ON profile.setting_id = setting.id WHERE profile.id = $profile";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             ?>
-
             center: ol.proj.fromLonLat([<?php echo $row['x']; ?>, <?php echo $row['y']; ?>]),
             zoom: <?php echo $row['zoom']; ?>
-
             <?php
         }
     }
 }
 
 function generate_popup($conn) {
-    $sql = "SELECT * FROM setting where id = 1";
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT setting.popup, setting.field_popup FROM `profile` INNER JOIN setting ON profile.setting_id = setting.id WHERE profile.id = '$profile'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             if ($row['popup'] == 1) {
                 ?>
-                var infoalamatuniv = <?php generate_info_popup($row['field_popup']); ?>
+                var container = document.getElementById('popup');
+                var content = document.getElementById('popup-content');
+                var closer = document.getElementById('popup-closer');
+
+                var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+                element: container,
+                autoPan: true,
+                autoPanAnimation: {
+                duration: 250
+                }
+                }));
+
+                closer.onclick = function () {
+                overlay.setPosition(undefined);
+                closer.blur();
+                return false;
+                };
+
+                var popup = <?php generate_info_popup($row['field_popup']); ?>
 
                 map.on('singleclick', function (evt) {
                 var coordinate = evt.coordinate;
-                infoalamatuniv(evt.pixel);
+                popup(evt.pixel);
                 overlay.setPosition(coordinate);
                 });
                 map.addOverlay(overlay);
@@ -362,20 +346,11 @@ function generate_geocoder() {
     });
     <?php
 }
-?>
 
-<script>
-
-    function menuju_lokasi(param) {
-        var arr = param.split('|');
-        view1.animate({
-            center: ol.proj.fromLonLat([arr[0] * 1.000, arr[1] * 1.000]),
-            zoom: 16,
-            duration: 2000
-        });
-        //content = document.getElementById('geocoder_overlay');
-        //content.innerHTML = '<p>' + arr[2] + '</p>';
-        //overlay.setPosition(ol.proj.fromLonLat([arr[0] * 1.000, arr[1] * 1.000]));
+function debug_post_profile() {
+    if (isset($_POST['profile'])) {
+        echo 'post profile : ' . $_POST['profile'];
     }
-
-</script>
+    echo 'session profile : ' . $_SESSION['profile'];
+}
+?>

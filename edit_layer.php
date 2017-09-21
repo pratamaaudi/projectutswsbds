@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'class/koneksi.php';
 include_once 'class/insert_database.php';
 ?>
@@ -43,9 +44,9 @@ include_once 'class/insert_database.php';
 <?php
 
 function generate_urutan_layer($conn) {
-    $max = hitung_data_layer("1", $conn);
-
-    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $max = hitung_data_layer($_SESSION['profile'], $conn);
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT * FROM `layer` WHERE profile_id = $profile ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -88,9 +89,8 @@ function generate_urutan_layer($conn) {
 }
 
 function generate_layer_setting($conn) {
-    $max = hitung_data_layer("1", $conn);
-
-    $sql = "SELECT * FROM `layer` WHERE profile_id = 1 ORDER BY urutan";
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT * FROM `layer` WHERE profile_id = $profile ORDER BY urutan";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -140,7 +140,7 @@ function generate_layer_setting($conn) {
                             readonly=""
                             value="<?php echo $row['layer']; ?>">
 
-                        <?php if ($row['tipe'] != 'point' && $row['tipe'] != 'point_icon') { ?>
+                        <?php if ($row['tipe'] != 'point' && $row['tipe'] != 'point_icon' && $row['tipe'] != 'polygon_tricolor') { ?>
                             <h4>Stroke</h4>
 
                             <input 
@@ -154,7 +154,7 @@ function generate_layer_setting($conn) {
                             }
                             ?>
 
-                        <?php if ($row['tipe'] != 'line' && $row['tipe'] != 'point_icon') { ?>
+                        <?php if ($row['tipe'] != 'line' && $row['tipe'] != 'point_icon' && $row['tipe'] != 'polygon_tricolor') { ?>
 
                             <h4>Fill</h4>
 
@@ -168,7 +168,7 @@ function generate_layer_setting($conn) {
 
                         <?php } ?>  
 
-                        <?php if ($row['tipe'] == 'polygon' && $row['tipe'] != 'point_icon') { ?>
+                        <?php if ($row['tipe'] == 'polygon' && $row['tipe'] != 'point_icon' && $row['tipe'] != 'polygon_tricolor') { ?>
 
                             <h4>Alpha</h4>
 
@@ -191,10 +191,64 @@ function generate_layer_setting($conn) {
                                 type="text" 
                                 class="form-control"
                                 readonly
-                                value="<?php echo $row['icon']; ?>"><?php }
-                        ?>
+                                value="<?php echo $row['icon']; ?>"><?php
+                            }
 
-                        <?php if ($row['tipe'] != 'point_icon') { ?>
+                            if ($row['tipe'] == 'polygon_tricolor') {
+                                ?>
+                            <h4>field</h4>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                name="rgb"
+                                placeholder="0,0,0"
+                                value="<?php echo $row['field']; ?>">
+                            <h4>Fill</h4>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                name="rgb"
+                                placeholder="0,0,0"
+                                value="<?php echo $row['rgb']; ?>">
+                            <h4>Fill</h4>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                name="rgb"
+                                placeholder="0,0,0"
+                                value="<?php echo $row['rgb2']; ?>">
+                            <h4>Fill</h4>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                name="rgb"
+                                placeholder="0,0,0"
+                                value="<?php echo $row['rgb3']; ?>">
+                            <h4>Batasan 1</h4>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                name="rgb"
+                                placeholder="0,0,0"
+                                value="<?php echo $row['batas1']; ?>">
+                            <h4>Batasan 2</h4>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="rgb" 
+                                name="rgb"
+                                placeholder="0,0,0"
+                                value="<?php echo $row['batas2']; ?>">
+                                <?php
+                            }
+                            ?>
+
+                        <?php if ($row['tipe'] != 'point_icon' && $row['tipe'] != 'polygon_tricolor') { ?>
                             <button 
                                 type="submit" 
                                 class="btn btn-primary form-control"
