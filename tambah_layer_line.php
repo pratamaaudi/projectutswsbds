@@ -1,3 +1,4 @@
+<div class="container">
 <form 
     action="class/upload.php" 
     method="post" 
@@ -8,26 +9,26 @@
         name="jenis"
         value="line">
 
-    <h3>Upload Layer Line</h3>
-    Select Layer:
+    <h1>Upload Layer Line</h1>
+    <h3>Select Layer:</h3>
 
     <input 
         type="file" 
         name="fileToUpload" 
         id="layerLine">
 
-    <br>
-    Warna Garis:<br>
-
+    <br><br>
+   <h3> Warna Garis:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="stroke" 
-        placeholder ="Warna Garis">
+        placeholder ="Warna Garis" style="width: 15%">
 
     <br><br>
 
-    <input 
+    <input class="button btn-primary" 
         type="submit" 
         value="Submit" 
         name="submit">
 </form>
+</div>

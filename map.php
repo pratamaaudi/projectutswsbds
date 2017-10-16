@@ -65,7 +65,7 @@ set_session_profile();
                 right: 8px;
             }
             .ol-popup-closer:after {
-                content: "âœ–";
+                content: "X";
             }
         </style>
 
@@ -131,10 +131,10 @@ set_session_profile();
 
         <div id="geocoder_overlay" style="width:100px"></div>
 
-        <div id="popup" class="ol-popup">
-            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-            <div id="popup-content"></div>
-        </div>
+        <?php
+        generate_popup_html($conn);
+        ?>
+
 
         <div 
             class="container-fluid" 
@@ -150,7 +150,7 @@ set_session_profile();
             class="container" 
             style="
             margin-top: 10px;
-            background: blue;">
+            background: grey;">
 
             <h4 style="color: white">LEGEND</h4>
 
@@ -170,7 +170,6 @@ override_map();
 load_layer_setting($conn);
 ?>
             var view1 = new ol.View({<?php generate_view($conn); ?>});
-
             if (map == "bing") {
 <?php include ("bing.php"); ?>
             } else if (map == "osm") {
@@ -260,6 +259,24 @@ function generate_view($conn) {
             center: ol.proj.fromLonLat([<?php echo $row['x']; ?>, <?php echo $row['y']; ?>]),
             zoom: <?php echo $row['zoom']; ?>
             <?php
+        }
+    }
+}
+
+function generate_popup_html($conn) {
+    $profile = $_SESSION['profile'];
+    $sql = "SELECT setting.popup, setting.field_popup FROM `profile` INNER JOIN setting ON profile.setting_id = setting.id WHERE profile.id = '$profile'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            if ($row['popup'] == 1) {
+                ?>
+                <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                </div>
+                <?php
+            }
         }
     }
 }

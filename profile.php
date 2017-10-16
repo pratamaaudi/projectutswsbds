@@ -6,9 +6,10 @@ include './class/koneksi.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+ 
     </head>
     <body>
+        <div class="container">
         <h4>PROFIL AKTIF</h4>
 
         <form
@@ -33,14 +34,16 @@ include './class/koneksi.php';
             <button class="btn btn-success">LOAD</button>
 
         </form>
-
         </br>
+    </div>
+        
 
         <hr>
 
-        <h4>TAMBAH PROFILE</h4>
-
-        <form
+        
+<div class="container" style="background-color: cyan;">
+    <h1><b>TAMBAH PROFILE<b></h1>
+        <form style="background: cyan;" 
             action="class/insert.php"
             method="post">
 
@@ -49,52 +52,58 @@ include './class/koneksi.php';
                 name="jenis"
                 value="profile">
 
-            Nama Profil :<br>
-            <input
+            <h4>Nama Profil</h4>
+            <input class="form-control" 
                 type="text"
-                name="nama">
+                name="nama"
+                required="">
 
             <br>
-            <input 
+            <div class="radio">
+           <h4> <input  
                 type="radio" 
                 name="map" 
-                value="bing"> bing
-
-            <input 
+                value="bing" 
+                checked=""> Bing </h4>
+            </div>
+            <div class="radio">
+           <h4> <input 
                 type="radio" 
                 name="map" 
-                value="osm"> osm
-
+                value="osm"> OSM </h4>
+            </div>
             <br>
-            Set Titik Tengah dan Zoom Default<br>
-            Titik X :<br>
 
-            <input 
+            <h3>Set Titik Tengah dan Zoom Default</h3><br>
+            <h4>Titik X :</h4>
+
+            <input class="form-control" 
                 type="text" 
                 name="x" 
-                placeholder ="koordinat X">
+                placeholder ="koordinat X"
+                required="">
 
             <br>
-            Titik Y :<br>
-
-            <input 
+           <h4> Titik Y :</h4>
+            <input class="form-control" 
                 type="text" 
                 name="y" 
-                placeholder ="koordinat Y">
+                placeholder ="koordinat Y"
+                required="">
 
             <br>
-            Zoom :<br>
-
-            <input 
-                type="text" 
+           <h4> Zoom :</h4>
+            <input class="form-control" 
+                   type="number" 
                 name="zoom" 
-                placeholder ="zoom">
+                placeholder ="zoom"
+                required="">
 
             <br><br>
             <button class="btn btn-success">SAVE</button>
 
         </form>
-
+</div>
 
 
         <?php //debug_profile($_SESSION['profile']); ?>

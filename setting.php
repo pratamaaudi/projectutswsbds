@@ -4,11 +4,12 @@
 
         <?php include 'class/plugin.php'; ?>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
         <script>
             $(document).ready(function () {
                 $("#pengaturan").click(function () {
                     $('#setting').load('general.php');
-
                 })
                 $("#tambah_layer").click(function () {
                     $('#setting').load('tambah_layer.php');
@@ -107,3 +108,13 @@
         </div>
     </body>
 </html>
+
+<script>
+    function autoinputisian2(inputan) {
+        $("#batas2").val(inputan);
+    }
+
+    function autoinputisian4(inputan) {
+        $("#batas4").val(inputan);
+    }
+</script>

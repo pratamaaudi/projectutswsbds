@@ -8,7 +8,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         ?>
-
+<div class="container">
         <form 
             action="class/update.php" 
             method="post" 
@@ -19,80 +19,90 @@ if ($result->num_rows > 0) {
                 name="jenis"
                 value="general"/>
 
-            <h3>Map Bing / OSM</h3>
+            <h2>Map Bing / OSM</h2>
 
+            <div class="radio">
             <?php if ($row['map'] == 'bing') { ?>
-                <input 
+              <h4>  <input 
                     type="radio" 
                     name="map" 
                     value="bing"
-                    checked> bing
+                    checked> Bing </h4>
+            </div>
 
-                <input 
+            <div class="radio">
+               <h4> <input 
                     type="radio" 
                     name="map" 
-                    value="osm"> osm
+                    value="osm"> OSM </h4>
+            </div>
                 <?php } else {
                     ?>
-                <input 
+            <div class="radio">
+               <h4> <input 
                     type="radio" 
                     name="map" 
-                    value="bing"> bing
+                    value="bing"> Bing </h4>
+            </div>
 
-                <input 
+            <div class="radio">
+               <h4> <input 
                     type="radio" 
                     name="map" 
                     value="osm"
-                    checked> osm
+                    checked> OSM </h4>
+            </div>
                     <?php
                 }
                 ?>
-            <br>
-            <br>
+            <br> <hr>
 
-            <h3>Set Titik Tengah dan Zoom Default</h3>
-            Titik X :<br>
-
-            <input 
+            <h2>Set Titik Tengah dan Zoom Default</h2> <br>
+            
+           <h4> Titik X :</h4>
+            <input class="form-control
                 type="text" 
                 name="x" 
                 placeholder ="koordinat X"
                 value="<?php echo $row['x']; ?>">
 
             <br>
-            Titik Y :<br>
-
-            <input 
+           <h4> Titik Y :</h4>
+            <input class="form-control
                 type="text" 
                 name="y" 
                 placeholder ="koordinat Y"
                 value="<?php echo $row['y']; ?>">
 
             <br>
-            Zoom :<br>
+           <h4> Zoom :</h4>
 
-            <input 
+            <input class="form-control
                 type="text" 
                 name="zoom" 
                 placeholder ="zoom"
                 value="<?php echo $row['zoom']; ?>">
 
-            <br> <br>
+            <br>  <hr>
 
             <h3>POP UP</h3>
-
+            
             <?php if ($row['popup'] == 1) { ?>
-                <input 
+            <div class="checkbox">
+               <h4> <input 
                     type="checkbox" 
                     name="popup" 
                     value="true"
-                    checked=""> POPUP
+                    checked=""> ON </h4>
+            </div>
                 <?php } else {
                     ?>
-                <input 
+            <div class="checkbox">
+               <h4> <input 
                     type="checkbox" 
                     name="popup" 
-                    value="OFF"> POPUP
+                    value="OFF"> ON </h4>
+            </div>
                     <?php
                 }
                 ?>
@@ -100,22 +110,21 @@ if ($result->num_rows > 0) {
 
             <br>
 
-            Kolom field:<br>
-
-            <input 
+           <h4> Kolom field:</h4>
+            <input class="form-control
                 type="text" 
                 name="field_popup"
                 value="<?php echo $row['field_popup']; ?>">
 
-            <br><br>
+            <br>
 
-            <input 
+            <input class="button btn-primary" 
                 type="submit" 
                 value="Submit" 
                 name="submit">
 
         </form>
-
+</div>
         <?php
     }
 }

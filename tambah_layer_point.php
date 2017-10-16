@@ -1,4 +1,5 @@
-<form 
+<div class="container">
+<form  
     action="class/upload.php" 
     method="post" 
     enctype = "multipart/form-data">
@@ -8,50 +9,52 @@
         name="jenis"
         value="point"/>
 
-    <h3>Upload Layer Point</h3>
-    Select Layer:
+    <h1>Upload Layer Point</h1>
+   <h3> Select Layer:</h3>
 
     <input 
         type="file" 
         name="fileToUpload" 
         id="layerPoint">
 
-    <br>
+    <br><hr>
 
-    <input 
+<div class="radio">
+   <h4> <input
         type="radio" 
         name="maptype" 
         value="icon" 
-        checked> icon
-
-    <br>
-    Select Icon :
+        checked> Icon</h4>
+</div>
+   <h3> Select Icon :</h3>
 
     <input 
         type="file" 
         name="uploadicon" 
         id="icon">
 
-    <br>
-    <input 
+    <br><hr>
+
+    <div class="radio">
+  <h4> <input 
         type="radio" 
         name="maptype" 
-        value="point">point
+        value="point"> Point </h4>
+    </div> 
 
-    <br>
-    Warna Luasan:<br>
-
+   <h3> Warna Luasan:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="fill" 
-        placeholder ="Warna Luasan">
+        placeholder ="Warna Luasan" style="width: 15%">
 
     <br>
 
     <br>
 
-    <input 
+    <input class="button btn-primary" 
         type="submit" 
         value="Submit" 
         name="submit">
 </form> 
+</div>

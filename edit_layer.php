@@ -144,8 +144,8 @@ function generate_layer_setting($conn) {
                             <h4>Stroke</h4>
 
                             <input 
-                                type="text" 
-                                class="form-control" 
+                                type="color" 
+                                style="width: 100%;"
                                 id="stroke" 
                                 name="stroke"
                                 placeholder="#ffffff"

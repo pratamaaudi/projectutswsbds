@@ -10,7 +10,9 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1; //not used yet
 $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
 $jenis = $_POST["jenis"];
-// Check if image file is a actual image or fake image
+
+
+// Check if submit button clicked
 if (isset($_POST["submit"])) {
     // Check if file already exists
     if (file_exists($target_file)) {
@@ -56,8 +58,11 @@ if (isset($_POST["submit"])) {
                             echo "The file " . basename($_FILES["uploadicon"]["name"]) . " has been uploaded.";
                         }
                     } else {
-                        $fill = $_POST["fill"];
-                        insert_layer_point(basename($_FILES["fileToUpload"]["name"]), $fill, $_SESSION["profile"], $conn);
+                        $fill = $_POST['fill'];
+                        $hex = $fill;
+                        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+                        $rgb = "$r,$g,$b";
+                        insert_layer_point(basename($_FILES["fileToUpload"]["name"]), $rgb, $_SESSION["profile"], $conn);
                         echo 'insert layer point';
                     }
                     break;
@@ -71,7 +76,11 @@ if (isset($_POST["submit"])) {
                         $fill = $_POST["fill"];
                         $stroke = $_POST["stroke"];
                         $alpha = $_POST["alpha"];
-                        insert_layer_polygon_static(basename($_FILES["fileToUpload"]["name"]), $stroke, $fill, $alpha, $_SESSION["profile"], $conn);
+                        $hex = $fill;
+                        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+                        $rgb = "$r,$g,$b";
+
+                        insert_layer_polygon_static(basename($_FILES["fileToUpload"]["name"]), $stroke, $rgb, $alpha, $_SESSION["profile"], $conn);
                         echo 'insert layer poligon statis';
                     } else if ($_POST["warna"] == 'tricolor') {
                         $fill1 = $_POST["fill1"];
@@ -80,6 +89,7 @@ if (isset($_POST["submit"])) {
                         $batas1 = $_POST["batas1"];
                         $batas2 = $_POST["batas2"];
                         $field = $_POST["field"];
+
                         insert_layer_polygon_tricolor(basename($_FILES["fileToUpload"]["name"]), $fill1, $fill2, $fill3, $batas1, $batas2, $field, $_SESSION["profile"], $conn);
                         echo 'insert layer polygon tricolor';
                     }

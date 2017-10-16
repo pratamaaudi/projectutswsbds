@@ -67,7 +67,7 @@
                 anchor: [0.5, 0.5],
                 opacity: 1,
                 scale: 0.25,
-                src: '<?php echo $row['icon']; ?>'
+                src: 'asset/<?php echo $row['icon']; ?>'
             })
         });
 <?php } ?>

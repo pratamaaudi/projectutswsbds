@@ -1,3 +1,4 @@
+<div class="container">
 <form 
     action="class/upload.php" 
     method="post" 
@@ -8,41 +9,39 @@
         name="jenis"
         value="polygon"/>
 
-    <h3>Upload Layer Polygon</h3>
-    Select Layer:
+    <h1>Upload Layer Polygon</h1>
+    <h3>Select Layer:</h3>
 
-    <input 
+    <input
         type="file" 
         name="fileToUpload" 
         id="layerPolygon">
 
-    <br>
-
-    <input 
+    <br><hr>
+<div class="radio">
+   <h4> <input 
         type="radio" 
         name="warna" 
         value="static" 
-        checked> statis (1 warna)
+        checked> Statis (1 warna)</h4>
+</div>
 
-    Warna Garis:<br>
-
+    <h3>Warna Garis:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="stroke" 
-        placeholder ="Warna Garis">
+        placeholder ="Warna Garis" style="width: 15%">
 
     <br>
-    Warna Luasan:<br>
-
+    <h3>Warna Luasan:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="fill" 
-        placeholder ="Warna Luasan">
+        placeholder ="Warna Luasan" style="width: 15%">
 
     <br>
-    Trasnparansi:<br>
-
-    <input 
+    <h3>Trasnparansi:</h3>
+    <input class="form-control" style="width: 15%" 
         type="number" 
         name="alpha" 
         step="0.1"
@@ -50,70 +49,73 @@
         min="0"
         placeholder ="Transparansi">
 
-    <br><br>
-
-    <input 
+    <br><hr>
+<div class="radio">
+   <h4> <input 
         type="radio" 
         name="warna" 
         value="tricolor" 
-        checked> tricolor (3 warna)
-
-    <br>
+        checked> Tricolor (3 warna)</h4>
+</div>
     
-    Field :<br>
-    <input
+    <h3>Field :</h3>
+    <input class="form-control" style="width: 40%" 
         type="text"
         name="field"
         placeholder="field">
     
     <br>
     
-    Warna Luasan 1:<br>
-
+    <h3>Warna Luasan 1:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="fill1" 
-        placeholder ="Warna Luasan 1">
+        placeholder ="Warna Luasan 1" style="width: 15%">
     
       <    
     
-    <input
+    <input 
         type="number"
         name="batas1"
-        placeholder="batas 1">
+        placeholder="batas 1"
+        id="batas1"
+        oninput="autoinputisian2(this.value)">
 
     <br>
-    Warna Luasan 2:<br>
-
+    <h3>Warna Luasan 2:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="fill2" 
-        placeholder ="Warna Luasan 2">
+        placeholder ="Warna Luasan 2" style="width: 15%">
     
     <input
         type="number"
-        disabled="">  -  
+        disabled=""
+        id="batas2">  -  
     
     <input
         type="number"
         name="batas2"
-        placeholder="batas 2">
+        placeholder="batas 2"
+        id="batas3"
+        oninput="autoinputisian4(this.value)">
 
     <br>
-    Warna Luasan 3:<br>
-
+    <h3>Warna Luasan 3:</h3>
     <input 
-        type="text" 
+        type="color" 
         name="fill3" 
-        placeholder ="Warna Luasan 3">
+        placeholder ="Warna Luasan 3" style="width: 15%">
     
     <input
         type="number"
-        disabled="">  >  
+        disabled=""
+        id="batas4">  >  
 
     <br><br>
-    <input 
+    <input class="button btn-primary" 
         type="submit" 
         value="Submit" 
         name="submit">
 </form>
+</div>
